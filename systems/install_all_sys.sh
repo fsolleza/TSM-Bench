@@ -1,11 +1,14 @@
 #!/bin/sh
-cd systems
+
+set -e
+
+#cd systems
 was_in_root=$?
 
-# # ClickHouse
-# cd clickhouse
-# sh ./install.sh
-# cd ..
+# ClickHouse
+cd clickhouse
+sh ./install.sh
+cd ..
 
 # # Druid
 # cd druid
@@ -36,9 +39,9 @@ was_in_root=$?
 # 
 
 # TimescaleDB
-cd  timescaledb
-sh ./install.sh
-cd ..
+# cd  timescaledb
+# sh ./install.sh
+# cd ..
 
 
 

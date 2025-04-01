@@ -1,3 +1,9 @@
+.*.swp
+.*.swo
+
 *.csv
 *.tar.gz
+
+systems/clickhouse/clickhouse
+systems/TSMvenv
 
