@@ -14,6 +14,7 @@ pip3 install clickhouse-driver
 # sleep 5
 # sudo docker stop clickhouse-container
 
+rm clickhouse
 curl https://clickhouse.com/ | sh
 
 

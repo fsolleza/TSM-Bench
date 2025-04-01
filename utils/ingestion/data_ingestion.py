@@ -124,6 +124,7 @@ class DataIngestor:
         :param ingestion_logger:  IngestionResult object to log the ingestion results
         :param dataset: dataset name , some systems  need it)
         """
+        print("in input data")
 
         from systems.utils.connection_class import Connection
         ingestion_logger.set_evaluated()
@@ -131,12 +132,15 @@ class DataIngestor:
         ## establisch connection
         connection: Connection = self.system_module.get_connection(host=self.host, dataset=self.dataset)
 
+        thread_start_time = time.time()
         try:
             for sql in insertion_queries:
                 if isinstance(sql, str):
-                    n_rows = str(sql).count("(") - 1
-                    min_time = sql.split("VALUES")[1].split(",")[0].replace("(","").replace("'","")
-                    print("number of rows to insert", n_rows,min_time )
+                    # n_rows = str(sql).count("(") - 1
+                    # min_time = sql.split("VALUES")[1].split(",")[0].replace("(","").replace("'","")
+                    # print("number of rows to insert", n_rows,min_time )
+                    # print(time.time() - thread_start_time)
+                    print("Skipping row parsing")
                 elif self.system == "influx": #influx  get a list of points to insert
                     n_rows = len(sql)
                     min_time = sql[0].split(" ")[-1]
@@ -147,11 +151,13 @@ class DataIngestor:
                 # stop if the event is set (e.g. the ingestion is finished)
                 if self.event.is_set():
                     "setting event"
+                    print("Exiting because ingestion should be finished?")
                     break
 
                 start = time.time()
                 connection.write(sql) # ingestion is done here
                 diff = time.time() - start
+                print("Write took {}", diff)
                 ingestion_logger.add_times(start, diff)
                 if diff <= self.diff_threshold:
                     assert diff > 0

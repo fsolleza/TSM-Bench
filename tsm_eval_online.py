@@ -79,6 +79,7 @@ if system == "monetdb":
     n_threads = 1
 
 n_rows = [int(batch_size / 100 / n_threads) for batch_size in batch_sizes]
+print(n_rows)
 
 system_module: timescaledb = system_module_map[system]
 

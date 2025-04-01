@@ -29,11 +29,13 @@ echo "loading $dataset"
 #cat "../../datasets/$dataset.csv" | sudo docker exec -i clickhouse-container clickhouse-client --format_csv_delimiter="," --query="INSERT INTO $dataset FORMAT CSVWithNames"
 
 ./clickhouse client -C clickhouse-config.xml --format_csv_delimiter="," -q "INSERT INTO $dataset FORMAT CSV" < ../../datasets/$dataset.csv
+# 
 
+# end_time=$(date +%s.%N)
+# elapsed_time="$(echo "$end_time - $start_time" | bc)"
+# elapsed_time=$(printf "%.2f" "$elapsed_time")
 
-end_time=$(date +%s.%N)
-elapsed_time="$(echo "$end_time - $start_time" | bc)"
-elapsed_time=$(printf "%.2f" "$elapsed_time")
+echo "Done loading $dataset.csv"
 
 # echo "computing compression"
 # compression="$(sh compression.sh $dataset | tail -n 1)"

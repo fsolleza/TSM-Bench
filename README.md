@@ -1,3 +1,48 @@
+# Notes
+
+Build the data first
+
+```
+cd datasets
+sh build.sh d1
+```
+
+Then install everything
+
+```
+cd systems/
+sh install_dep.sh
+source TSMvenv/bin/activate
+sh install_all_sys.sh
+sh install_client_lib.sh
+```
+
+## Clickhouse setup
+
+```
+cd systems/clickhouse
+rm -rf /nvme/data/tsm_bench/clickhouse && sh launch.sh
+
+# In another terminal, load the data.
+# There seems to be something wrong with the csv file?
+sh load.sh
+```
+
+## online client
+
+below, --batch_size 10000 indicates 10000 records per second
+```
+source TSMvenv/bin/activate
+python3 tsm_eval_online.py --system clickhouse --queries q1 --host "localhost" --batch_size 10000
+```
+
+## problem
+
+the internal loop in `utils/ingest/data_ingestion.DataIngestor.input_data`. the
+data generator takes > than 15 seconds which is the total evaluation time.
+
+
+
  # Comprehensive Benchmark for Time Series Database Systems 
 
 TSM-Bench is a new benchmark that compares seven Time Series Database Systems (TSDBs) using a mixed set of workloads. It can be easily extended with new systems, queries, datasets, and workloads. The benchmark introduces a novel data generation method that augments seed real-world time series datasets, enabling realistic and scalable benchmarking. Technical details can be found in the paper [TSM-Bench: Benchmarking Time Series Database Systems for Monitoring Applications](https://www.vldb.org/pvldb/vol16/p3363-khelifati.pdf), PVLDB'23. 

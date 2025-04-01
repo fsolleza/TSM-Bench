@@ -31,7 +31,6 @@ pip3 install lshashpy3
 sudo apt-get install  libpq-dev -y
 pip3 install psycopg2
 pip3 install pymonetdb
-pip3 install pydruid
 
 # Java
 sudo apt-get install -y openjdk-8-jdk

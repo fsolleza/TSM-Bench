@@ -4,6 +4,12 @@
 *.csv
 *.tar.gz
 
+__pycache__
 systems/clickhouse/clickhouse
+systems/clickhouse/clickhouse.*
 systems/TSMvenv
-
+results/
+systems/extremedb/eXtremeDB/
+systems/influx/influxdb-1.7.10-1/
+systems/questdb/questdb-6.2.1-rt-linux-amd64/
+utils/ingestion/ingestion_queries/

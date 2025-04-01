@@ -16,6 +16,6 @@ mkdir "$QuestDBroot"
 mkdir "$QuestDBroot/conf/"
 cp server.conf "$QuestDBroot/conf/"
 
-./questdb-6.2.1-rt-linux-amd64/bin/questdb.sh start -d "$QuestDBroot"
-
-sleep 25
+# ./questdb-6.2.1-rt-linux-amd64/bin/questdb.sh start -d "$QuestDBroot"
+# 
+# sleep 25
